@@ -1,0 +1,57 @@
+@font-face {
+    font-family: screenMatrix;
+    src: url(ScreenMatrix.ttf);
+}
+
+@font-face {
+    font-family: digitalS;
+    src: url(digital-7.ttf);
+}
+
+#container{
+	border: 3px solid black;
+	width: 50vw;
+	height: 72vw;
+	margin-top: 20%;
+	text-align: center;
+	background-color: lightgray;
+	border-radius: 3%;
+}
+
+.numb, .operator, #equal, #posNeg, #clear{
+	font-size: 1.5em;
+	margin-top: 5%;
+	width: 12%;
+	padding: 3%;
+	border: 2px solid black;
+	border-radius: 15%;
+	background-color: beige;
+		display: inline-block;
+}
+
+#solarCont{
+	margin-top: 7%;
+}
+
+.solarP{
+	display:inline;
+	margin-top: 5%;
+	padding: 2%;
+	border: 1px solid black;
+	background-color: green;
+}
+
+#display{
+	color: green;
+	font-family: digitalS; /*try to use "screenmatrix font"*/
+	font-size: 3em;
+	margin-left: 5%;
+	padding: 5%;
+	margin-top: 10%;
+	font-weight: bold;
+	width: 40vw;
+	border: 2px solid black;
+ 	background-color:  darkgray;
+}
+
+}
