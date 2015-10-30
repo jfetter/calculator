@@ -11,7 +11,7 @@
 #container{
 	border: 3px solid black;
 	width: 50vw;
-	height: 72vw;
+	height: 85vw;
 	margin-top: 20%;
 	text-align: center;
 	background-color: lightgray;
@@ -19,7 +19,7 @@
 }
 
 .numb, .operator, #equal, #posNeg, #clear{
-	font-size: 1.5em;
+	font-size: 3vw;
 	margin-top: 5%;
 	width: 12%;
 	padding: 3%;
