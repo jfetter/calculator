@@ -13,18 +13,18 @@ $("#equal").on("click", calculateAnswer);
 	var operator = operatorHolder.join()
 	if ( operator === "+")
 			answer = parseInt(numbHolder.join()) + parseInt(numbInput);
-	else if ( operator === "-")
-			answer = parseInt(numbHolder.join()) - parseInt(numbInput);
- 	else if (operator === "*")
- 			answer = parseInt(numbHolder.join()) * parseInt(numbInput);
- 	else if (operator === "/")
- 			answer = parseInt(numbHolder.join()) / parseInt(numbInput);
-	$("#display").text(answer);
-			numberHolder.push(answer);
-			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
- 			clear();
-console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
-			 	return answer;
+// 	else if ( operator === "-")
+// 			answer = parseInt(numbHolder.join()) - parseInt(numbInput);
+//  	else if (operator === "*")
+//  			answer = parseInt(numbHolder.join()) * parseInt(numbInput);
+//  	else if (operator === "/")
+//  			answer = parseInt(numbHolder.join()) / parseInt(numbInput);
+// 	$("#display").text(answer);
+// 			numberHolder.push(answer);
+// 			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
+//  			clear();
+// console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
+// 			 	return answer;
 };
 
 function clear(){
@@ -46,10 +46,10 @@ $(".operator").on("click", operatorPressed);
 
 function operatorPressed(){
 		if (operatorHolder <= 1) {
+			console.log(opPresses)
 		var opPresses = $(this).text();
 		operatorHolder.push(opPresses);
-		var operatorPressed = true;
- 		$("#display").text(operatorHolder);
+ 		$("#display").text(opPresses);
 		console.log("this.class:", $(this.text));
 	}
 	operatorHolder.pop();
