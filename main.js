@@ -20,17 +20,19 @@ $("#equal").on("click", calculateAnswer);
 //  	else if (operator === "/")
 //  			answer = parseInt(numbHolder.join()) / parseInt(numbInput);
 // 	$("#display").text(answer);
-// 			numberHolder.push(answer);
+			numberHolder.pop();
+			numberHolder.push(answer);
 // 			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
 //  			clear();
 // console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
-// 			 	return answer;
+ 			 	return answer;
 };
 
 function clear(){
 				 numbInput = "";
 				 numberHolder = [];
 				 operatorHolder = [];
+				 $("#display").text(" ");
 }
 
 //create a state operatorPressed
@@ -67,7 +69,7 @@ function preformPseudoOperation () {
 	  var itemText = $(this).text();
 	console.log("this text:" +  itemText);
 		if(itemText === "clear"){
-		clear;
+		clear();
 		 console.log("triggered clear");
 		}
 		else if(itemText === "+/-"){
