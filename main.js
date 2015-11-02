@@ -42,31 +42,26 @@ $(".operator").on("click", operatorPressed);
 					}else if 	( operator === "+/-")  {
 						numbInput = parseFloat(numbInput) * -1; 
 						  $("#display").text(numbInput)
-						};
-			// 	else if ( operator === "-")
-			// 			answer = parseFloat(numbHolder.join()) - parseFloat(numbInput);
-			//  	else if (operator === "*")
-			//  			answer = parseFloat(numbHolder.join()) * parseFloat(numbInput);
-			//  	else if (operator === "/")
-			//  			answer = parseFloat(numbHolder.join()) / parseFloat(numbInput);
-			// 	$("#display").text(answer);	
-					//	operatorHolder.pop();
-					if (operator !== "+/-"){
+						  return
+						}
+				else if ( operator === "-"){ answer = parseFloat(numberHolder) - parseFloat(numbInput)
+				}
+			 	else if (operator === "*"){ answer = parseFloat(numberHolder) * parseFloat(numbInput)
+				}
+			 	else if (operator === "/"){ answer = parseFloat(numbInput) / parseFloat(numberHolder)
+				}
+				$("#display").text(answer);	
+						operatorHolder.pop();
 						numberHolder = answer;
 						$("#display").text(answer)
-					}
-			// 			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
-			//  			clear();
-			// console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
-			 			 	return answer;
+			 			 return answer;
 			 			 }
-	//		 			 	else // CHANGE ANSWER TO GRAB VALUE FROM SCREEN
 
 function clear(){
 				 numbInput = "";
 				 numberHolder = "";
 				 operatorHolder = [];
-				 $("#display").text("&nbsp;");
+				 $("#display").html("&nbsp;");
 }
 
 //create a state operatorPressed
