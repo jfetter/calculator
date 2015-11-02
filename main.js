@@ -1,38 +1,72 @@
 "use strict"
+
+var numbInput = "";
+var numberHolder = "";
+var operatorHolder = []; 
+
 $(document).ready(init);
 function init (){
 
-var numbInput = "";
-var numberHolder = [];
-var operatorHolder = []; 
-
+$(".numb").on("click", grabNumber);
 $("#equal").on("click", calculateAnswer);
+$(".pseudoOp").on("click", preformPseudoOperation);
+$(".operator").on("click", operatorPressed);
 
-	function calculateAnswer(){
-	var answer = "";
-	var operator = operatorHolder.join()
-	if ( operator === "+")
-			answer = parseInt(numbHolder.join()) + parseInt(numbInput);
-// 	else if ( operator === "-")
-// 			answer = parseInt(numbHolder.join()) - parseInt(numbInput);
-//  	else if (operator === "*")
-//  			answer = parseInt(numbHolder.join()) * parseInt(numbInput);
-//  	else if (operator === "/")
-//  			answer = parseInt(numbHolder.join()) / parseInt(numbInput);
-// 	$("#display").text(answer);
-			numberHolder.pop();
-			numberHolder.push(answer);
-// 			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
-//  			clear();
-// console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
- 			 	return answer;
 };
+
+	function grabNumber(){
+	if (numbInput.length < 6){
+			var digits = $(this).text();
+			numbInput += digits;
+	  	// if (operatorHolder.length > 0 &&){
+	  	// 	calculateAnswer;
+	  	// 	numbInput = "";
+	   // 		console.log("numbHolder:" , numberHolder)
+	 		// }
+	 		console.log("numberInput" + numbInput);
+	 		$("#display").text(numbInput);
+		}; 	
+	};	
+
+
+	
+	function calculateAnswer(){
+		console.log("imma calculate the answer")
+
+	//if (operatorHolder.length  ){
+			var answer;
+			var operator = operatorHolder.join();
+					console.log("operator " + operator)
+				if ( operator === "+"){
+					 answer = parseFloat(numberHolder) + parseFloat(numbInput);
+					}else if 	( operator === "+/-")  {
+						numbInput = parseFloat(numbInput) * -1; 
+						  $("#display").text(numbInput)
+						};
+			// 	else if ( operator === "-")
+			// 			answer = parseFloat(numbHolder.join()) - parseFloat(numbInput);
+			//  	else if (operator === "*")
+			//  			answer = parseFloat(numbHolder.join()) * parseFloat(numbInput);
+			//  	else if (operator === "/")
+			//  			answer = parseFloat(numbHolder.join()) / parseFloat(numbInput);
+			// 	$("#display").text(answer);	
+					//	operatorHolder.pop();
+					if (operator !== "+/-"){
+						numberHolder = answer;
+						$("#display").text(answer)
+					}
+			// 			 			console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
+			//  			clear();
+			// console.log("numbInput: ", numbInput, "numberHolder: " + numberHolder + "operatorHolder: " + operatorHolder);
+			 			 	return answer;
+			 			 }
+	//		 			 	else // CHANGE ANSWER TO GRAB VALUE FROM SCREEN
 
 function clear(){
 				 numbInput = "";
-				 numberHolder = [];
+				 numberHolder = "";
 				 operatorHolder = [];
-				 $("#display").text(" ");
+				 $("#display").text("&nbsp;");
 }
 
 //create a state operatorPressed
@@ -43,40 +77,29 @@ function clear(){
 // $e.text(operatorPressed);
 // $e.data("clicked", operatorPressed);
 // console.log("e +" + $e + "operatorPressed:" + operatorPressed)
-		
-$(".operator").on("click", operatorPressed);
 
 function operatorPressed(){
-		if (operatorHolder <= 1) {
-			console.log(opPresses)
-		var opPresses = $(this).text();
-		operatorHolder.push(opPresses);
- 		$("#display").text(opPresses);
-		console.log("this.class:", $(this.text));
-	}
-	operatorHolder.pop();
-	if (numberHolder.length ){
-	}
-	numbInput = "";
-	calculateAnswer();
-	return opPresses;
+		if (operatorHolder <= 1 && numbInput.length > 0) {
+		var opPressed = $(this).text();
+		operatorHolder.push(opPressed);
+		console.log(opPressed)
+			if (opPressed !== "+/-"){
+ 				$("#display").text(opPressed);
+			}
+			numberHolder = numberHolder.concat(numbInput);
+			numbInput = ""
+	return opPressed;
 }
-
-$(".pseudoOp").on("click", preformPseudoOperation);
+}
 
 function preformPseudoOperation () {
 	console.log("pseudoOp");
 	  var itemText = $(this).text();
-	console.log("this text:" +  itemText);
+	console.log("this text:" +  typeof itemText );
 		if(itemText === "clear"){
 		clear();
 		 console.log("triggered clear");
-		}
-		else if(itemText === "+/-"){
- 	  var  number = parseInt(numbInput) * -1; 
- 	  $("#display").text(number);
-		}
-		else if(itemText === "."){
+		} else if(itemText === "."){
 			numberHolder += ".";
 		}
 } // end preformPseudoOperation;
@@ -84,19 +107,5 @@ function preformPseudoOperation () {
 // only grab numbers until an operator is pushed
 // then push what you've got to a temporary array to operate on)
 // no more than 6*6 numbers will fit in display, so cut off there
-$(".numb").on("click", grabNumber);
 
-	function grabNumber(){
-	if (numbInput.length < 6){
-			var numbPresses = $(this).text();
-			numbInput += numbPresses;
-	  	if (operatorHolder.length === 1){
-				numberHolder.push(numbInput);
-	  		numbInput = [];
-	   		console.log("numbHolder:" , numberHolder)
-	 		}
-	 		console.log(numbInput);
-	 		$("#display").text(numbInput);
-		}; 	
-	};	
-};
+
