@@ -18,7 +18,7 @@
 	border-radius: 3%;
 }
 
-.numb, .operator, #equal, #posNeg, #clear{
+.button{
 	font-size: 3vw;
 	margin-top: 5%;
 	width: 12%;

@@ -47,9 +47,9 @@ $(".operator").on("click", operatorPressed);
 		}
 	 	else if (operator === "*"){ answer = parseFloat(numberHolder[0]) * parseFloat(numbInput)
 		}
-	 	else if (operator === "/"){ answer = Number(numberHolder[0]) / Number(numbInput)
+	 	else if (operator === "/"){ answer = parseFloat(numberHolder[0]) / parseFloat(numbInput)
 		} 
-	$("#display").text(answer);	
+	//$("#display").text(answer);	
 	operatorHolder.pop();
 	numberHolder.pop();
 	numberHolder.push(answer);
@@ -88,24 +88,20 @@ function operatorPressed(){
 
 function preformPseudoOperation () {
 	console.log("pseudoOp");
-	  var itemText = $(this).text();
-	console.log("this text:" +  typeof itemText );
-		if(itemText === "clear"){
+	var itemText = $(this).text();
+	if(itemText === "clear")
 		clear();
-		 console.log("triggered clear");
-		} else if(itemText === "."){
-			numberHolder += ".";
-		}
-		else if 	( itemText === "+/-")  {
-						numbInput = parseFloat(numbInput) * -1; 
-						  $("#display").text(numbInput)
-						}
+	else if(itemText === "."){
+		numbInput += ".";
+		$("#display").text(numbInput);
+	}
+	else if ( itemText === "+/-") { 
+		if (numbInput.length === 0)
+			return;
+		numbInput = parseFloat(numbInput) * -1; 
+	  $("#display").text(numbInput)
+	}
 } 
 
-// I was thinking that if I assigned the current number being used into the first position of an array and 
-// the operator pressed to the second position of an array and pushed that array
-// into a larger array and then reduced the array of arrays based on conditions that
-// take the second item of each smaller array as the condition (eg: if + then do the add function)
-// and then I operate on the first item in the smaller array, then I can save a lot of DOM
-// manipulation
+
 
