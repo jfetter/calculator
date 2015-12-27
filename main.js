@@ -1,7 +1,12 @@
 "use strict"
 
+//the placce where each digit that is input is held
 var numbInput = "";
-var numberHolder = "";
+// when an operator is pressed the digits are moved into an array
+// and converted into numbers
+var numberHolder = [];
+//when an operator is pressed it is moved into an array 
+// and its operation is preformed on the 0th and 1st numbers in the numberHolder.
 var operatorHolder = []; 
 
 $(document).ready(init);
@@ -15,77 +20,71 @@ $(".operator").on("click", operatorPressed);
 };
 
 	function grabNumber(){
-	if (numbInput.length < 6){
+		//do not take numbers longer than you can display
+	if (numbInput.length < 6 ){
+		// if there is already a digit, move the new digit elsewhere
+		// this prolly needs to take place in the operator area. 
 			var digits = $(this).text();
+			//bind the input digits to the numbInput
+			// and display that input on the "calc screen"
 			numbInput += digits;
-	  	// if (operatorHolder.length > 0 &&){
-	  	// 	calculateAnswer;
-	  	// 	numbInput = "";
-	   // 		console.log("numbHolder:" , numberHolder)
-	 		// }
-	 		console.log("numberInput" + numbInput);
 	 		$("#display").text(numbInput);
 		}; 	
 	};	
-
-
 	
 	function calculateAnswer(){
-		console.log("imma calculate the answer")
 
 	//if (operatorHolder.length  ){
-			var answer;
-			var operator = operatorHolder.join();
-					console.log("operator " + operator)
-				if ( operator === "+"){
-					 answer = parseFloat(numberHolder) + parseFloat(numbInput);
-					}else if 	( operator === "+/-")  {
-						numbInput = parseFloat(numbInput) * -1; 
-						  $("#display").text(numbInput)
-						  return
-						}
-				else if ( operator === "-"){ answer = parseFloat(numberHolder) - parseFloat(numbInput)
-				}
-			 	else if (operator === "*"){ answer = parseFloat(numberHolder) * parseFloat(numbInput)
-				}
-			 	else if (operator === "/"){ answer = parseFloat(numbInput) / parseFloat(numberHolder)
-				}
-				$("#display").text(answer);	
-						operatorHolder.pop();
-						numberHolder = answer;
-						$("#display").text(answer)
-			 			 return answer;
-			 			 }
+	var answer;
+	var operator = operatorHolder[0]//.join();
+	console.log("OPERATOR BEFORE", operatorHolder)
+	console.log("numbInput BEFORE", numbInput)
+	console.log("NUMBER HOLDER BEFORE", numberHolder)
+		if ( operator === "+"){
+			 answer = parseFloat(numberHolder[0]) + parseFloat(numbInput);
+			}
+		else if ( operator === "-"){ answer = parseFloat(numberHolder[0]) - parseFloat(numbInput)
+		}
+	 	else if (operator === "*"){ answer = parseFloat(numberHolder[0]) * parseFloat(numbInput)
+		}
+	 	else if (operator === "/"){ answer = Number(numberHolder[0]) / Number(numbInput)
+		} 
+	$("#display").text(answer);	
+	operatorHolder.pop();
+	numberHolder.pop();
+	numberHolder.push(answer);
+	numbInput = "";
+	$("#display").text(answer)
+	return answer;
+}
 
 function clear(){
 				 numbInput = "";
-				 numberHolder = "";
+				 numberHolder = [];
 				 operatorHolder = [];
 				 $("#display").html("&nbsp;");
 }
 
-//create a state operatorPressed
-
-//define variable operatorPressed;
-// let operatorPressed;
-// let $e = $(event.target);
-// $e.text(operatorPressed);
-// $e.data("clicked", operatorPressed);
-// console.log("e +" + $e + "operatorPressed:" + operatorPressed)
-
 function operatorPressed(){
-		if (operatorHolder <= 1 && numbInput.length > 0) {
+		if ($("#display").length === 0)
+		return;
 		var opPressed = $(this).text();
+		console.log("OP PRESSED", opPressed)
 		operatorHolder.push(opPressed);
-		console.log(opPressed)
-			if (opPressed !== "+/-"){
- 				$("#display").text(opPressed);
+		$("#display").text(opPressed);
+		//if this is the first set of numbers to add
+		if (numberHolder.length > 0 && numbInput.length > 0){
+			calculateAnswer();
+		} // if this is the very first number entered
+		else if(numberHolder.length === 0) {
+			numberHolder.push(numbInput);
+			numbInput = "";
+			// but if you already calculated an answer and are storing that
+			} else {
+			 return;
 			}
-			numberHolder = numberHolder.concat(numbInput);
-			numbInput = ""
-	return opPressed;
 }
-}
+
 
 function preformPseudoOperation () {
 	console.log("pseudoOp");
@@ -97,10 +96,16 @@ function preformPseudoOperation () {
 		} else if(itemText === "."){
 			numberHolder += ".";
 		}
-} // end preformPseudoOperation;
+		else if 	( itemText === "+/-")  {
+						numbInput = parseFloat(numbInput) * -1; 
+						  $("#display").text(numbInput)
+						}
+} 
 
-// only grab numbers until an operator is pushed
-// then push what you've got to a temporary array to operate on)
-// no more than 6*6 numbers will fit in display, so cut off there
-
+// I was thinking that if I assigned the current number being used into the first position of an array and 
+// the operator pressed to the second position of an array and pushed that array
+// into a larger array and then reduced the array of arrays based on conditions that
+// take the second item of each smaller array as the condition (eg: if + then do the add function)
+// and then I operate on the first item in the smaller array, then I can save a lot of DOM
+// manipulation
 
